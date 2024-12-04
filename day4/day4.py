@@ -56,9 +56,31 @@ def main_1(f):
 
 
             
+def main_2(f):
+    cn = 0
+    # find two MAS forming an X
+    lines = f.readlines()
+    for y, line in enumerate(lines[1:-1]):
+        for x, c in enumerate(line[1:-1]):
+            if c != "A":
+                continue
+            row = y + 1
+            col = x + 1
+            d = 0
+            if (lines[row - 1][col - 1] == "M" and lines[row + 1][col + 1] == "S"):
+                d += 1
+            if lines[row - 1][col + 1] == "M" and lines[row + 1][col - 1] == "S":
+                d += 1
+            if lines[row + 1][col - 1] == "M" and lines[row - 1][col + 1] == "S":
+                d += 1
+            if lines[row + 1][col + 1] == "M" and lines[row - 1][col - 1] == "S":
+                d += 1
+            if d == 2:
+                cn += 1
+    return cn
 
 
 if __name__ == "__main__":
     with open(file) as f:
-
-        print(main_1(f))
+        # print(main_1(f))
+        print(main_2(f))
